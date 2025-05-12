@@ -1,0 +1,32 @@
+{
+  "id": "dnd-slot-inventory",
+  "title": "D&D Slot-Based Inventory",
+  "description": "A module that implements a slot-based inventory system for D&D in Foundry VTT",
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": "10",
+    "verified": "11"
+  },
+  "authors": [
+    {
+      "name": "Your Name"
+    }
+  ],
+  "esmodules": [
+    "dnd-slot-inventory.js"
+  ],
+  "styles": [
+    "dnd-slot-inventory.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "languages/en.json"
+    }
+  ],
+  "url": "https://github.com/yourusername/dnd-slot-inventory",
+  "manifest": "https://your-domain-or-github/raw/main/module.json",
+  "download": "https://your-domain-or-github/archive/main.zip",
+  "license": "MIT"
+}

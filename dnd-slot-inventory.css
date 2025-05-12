@@ -1,0 +1,21 @@
+/* Add some basic styling for the slot display */
+.dnd-slot-inventory-slots {
+  flex: 0 0 auto;
+  margin-left: 5px;
+  text-align: center;
+  line-height: 24px;
+  font-weight: bold;
+}
+
+.dnd-slot-inventory-slots i {
+  margin-right: 3px;
+  color: #7a7971;
+}
+
+.item-sheet .tab[data-tab="details"] input[name^="flags.dnd-slot-inventory."] {
+  max-width: 80px;
+}
+
+.item-sheet .tab[data-tab="details"] .form-group label+input[name^="flags.dnd-slot-inventory."] {
+  flex: 0 0 80px;
+}
