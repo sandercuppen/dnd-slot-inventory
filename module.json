@@ -25,8 +25,8 @@
       "path": "languages/en.json"
     }
   ],
-  "url": "https://github.com/yourusername/dnd-slot-inventory",
-  "manifest": "https://your-domain-or-github/raw/main/module.json",
-  "download": "https://your-domain-or-github/archive/main.zip",
+  "url": "https://github.com/sandercuppen/dnd-slot-inventory",
+  "manifest": "https://raw.githubusercontent.com/sandercuppen/dnd-slot-inventory/main/module.json",
+  "download": "https://github.com/sandercuppen/dnd-slot-inventory/archive/refs/heads/main.zip",
   "license": "MIT"
 }
