@@ -4,12 +4,12 @@
   "description": "A module that implements a slot-based inventory system for D&D in Foundry VTT",
   "version": "1.0.0",
   "compatibility": {
-    "minimum": "10",
-    "verified": "11"
+    "minimum": "13.342",
+    "verified": "13.342"
   },
   "authors": [
     {
-      "name": "Your Name"
+      "name": "Sander Cuppen"
     }
   ],
   "esmodules": [

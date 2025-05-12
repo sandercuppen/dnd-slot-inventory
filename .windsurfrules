@@ -1,0 +1,6 @@
+## AI Assistant Instructions
+
+* Reference the `PLANNING.md` file at the start of new development sessions to maintain context regarding scope, architecture, and constraints.
+* Use the tech stack and integration points outlined above when implementing features.
+* Consult the `TASK.md` for current priorities and backlog items.
+* Keep both files updated and in sync.
