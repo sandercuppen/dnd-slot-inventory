@@ -2,7 +2,10 @@
   "id": "dnd-slot-inventory",
   "title": "D&D Slot-Based Inventory",
   "description": "A module that implements a slot-based inventory system for D&D in Foundry VTT",
-  "version": "1.0.1",
+  "version": "1.0.2",
+  "dependencies": {
+    "dnd5e": "5"
+  },
   "compatibility": {
     "minimum": "13.342",
     "verified": "13.342"

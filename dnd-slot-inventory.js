@@ -71,31 +71,26 @@ Hooks.once('init', () => {
   }
 });
 
-// Display slots in character sheet
+// Display slots in character sheet (dnd5e v3.x compatible)
 Hooks.on('renderActorSheet5eCharacter', (app, html, data) => {
+  console.log(`${MODULE_ID} | renderActorSheet5eCharacter fired`);
   const actor = app.actor;
   const currentSlots = actor.getFlag(MODULE_ID, FLAG_CURRENT_SLOTS) ?? 0;
   const maxSlots = actor.getFlag(MODULE_ID, FLAG_MAX_SLOTS) ?? (BASE_SLOTS + (actor.system?.abilities?.str?.mod ?? 0));
 
-  // Try several selectors for robustness (dnd5e 3.x)
-  let inventoryHeader = html.find('.tab.inventory .inventory-header .item-controls');
-  if (!inventoryHeader.length) {
-    inventoryHeader = html.find('.inventory-list .inventory-header .item-controls');
-  }
-  if (!inventoryHeader.length) {
-    inventoryHeader = html.find('.inventory-header .item-controls');
-  }
-  if (inventoryHeader.length > 0) {
+  // Use the correct selector for dnd5e v3.x inventory controls
+  const inventoryControls = html.find('.items-header.item-controls[data-column-id="controls"]');
+  if (inventoryControls.length > 0) {
     if (html.find('.dnd-slot-inventory-slots').length === 0) {
-      const slotElement = $(`
-        <div class="item-control dnd-slot-inventory-slots" title="Inventory Slots Used / Max">
+      const slotElement = $(
+        `<div class="item-control dnd-slot-inventory-slots" title="Inventory Slots Used / Max" style="margin-left: 8px;">
           <i class="fas fa-box-open"></i> ${currentSlots} / ${maxSlots}
-        </div>
-      `);
-      inventoryHeader.prepend(slotElement);
+        </div>`
+      );
+      inventoryControls.prepend(slotElement);
     }
   } else {
-    console.warn(`${MODULE_ID} | Could not find inventory header element to add slot display.`);
+    console.warn(`${MODULE_ID} | Could not find inventory controls element to add slot display.`);
   }
 });
 
