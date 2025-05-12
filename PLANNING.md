@@ -42,8 +42,11 @@ To create a straightforward, functional module for Foundry Virtual Tabletop that
 * Focus on simplicity for the initial version.
 * Prioritize manual slot cost entry over complex automatic parsing.
 * No handling of container-in-container logic (e.g., bags reducing weight/slots of contents).
-* Does not replace or directly interact with the standard dnd5e weight-based encumbrance system by default.
+* Replaces the standard dnd5e weight-based encumbrance system for `character` actors by overriding the encumbrance calculation with slot-based logic (v13+).
+* Slot usage and limits are displayed in the character inventory UI using robust selectors for dnd5e v13+.
+* Items without a slot cost flag default to 1 slot, regardless of their weight (weight is ignored).
 * Primarily targets `character` actor types.
+* Current limitation: No fallback to weight-based logic for items missing slot cost; all such items count as 1 slot.
 
 ## 5. Development Tools
 

@@ -5,16 +5,19 @@ _Last updated: 2025-05-12_
 ## Completed (V1 Core Features)
 - [x] Max Slot Calculation: `10 + STR Mod` logic implemented.
 - [x] Manual Item Slot Cost: Custom flag (`flags.dnd-slot-inventory.slotCost`) with UI input on item sheets.
-- [x] Default Slot Cost: Defaults to 1 if not set/invalid.
+- [x] Default Slot Cost: Defaults to 1 if not set/invalid (weight is ignored if slot flag is missing).
 - [x] Slot Tracking: Calculates total slots used, considering item quantities.
-- [x] UI Display: Shows used/max slots on character sheet.
+- [x] UI Display: Shows used/max slots on character sheet with robust selectors for dnd5e v13+.
 - [x] Automatic Updates: Hooks for item/actor changes and initial calculation on Foundry ready.
 - [x] Target System: dnd5e, Foundry VTT v11+.
 - [x] No container-in-container logic (per V1 constraints).
-- [x] No replacement of standard encumbrance system (per V1 constraints).
+- [x] Slot-based encumbrance override for dnd5e v13+ implemented (replaces standard weight logic for characters).
 - [x] Primarily targets `character` actor types.
 
 ## In Progress / To Do
+- [ ] (Limitation) Items without a slot cost flag always count as 1 slot, regardless of their weight.
+- [ ] (Limitation) No fallback to weight-based logic for items missing the flag.
+- [ ] (Next) Consider warning users or providing migration tools for legacy items.
 - [ ] Testing & Bug Fixes: Manual and/or automated QA.
 - [ ] Documentation: Write README/user instructions.
 - [ ] Localization: Ensure language files are present and loaded.

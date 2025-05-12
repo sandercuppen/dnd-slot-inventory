@@ -39,13 +39,52 @@ async function calculateSlots(actor) {
   });
 }
 
+// --- SLOT-BASED ENCUMBRANCE OVERRIDE FOR DND5E v13+ ---
+Hooks.once('init', () => {
+  // Patch the encumbrance calculation for characters to use slot logic
+  if (game.system.id === 'dnd5e' && game.system.version.startsWith('3.')) {
+    const origComputeEncumbrance = CONFIG.Actor.documentClass.prototype._computeEncumbrance;
+    CONFIG.Actor.documentClass.prototype._computeEncumbrance = function(items, totalWeight) {
+      // Only affect characters
+      if (this.type !== 'character') return origComputeEncumbrance.call(this, items, totalWeight);
+      // Calculate slots
+      let currentSlots = 0;
+      for (const item of items) {
+        let slotCost = item.getFlag(MODULE_ID, FLAG_SLOT_COST);
+        if (typeof slotCost !== 'number' || isNaN(slotCost)) slotCost = 1;
+        const quantity = item.system?.quantity ?? 1;
+        currentSlots += slotCost * quantity;
+      }
+      const strengthMod = this.system?.abilities?.str?.mod ?? 0;
+      const maxSlots = BASE_SLOTS + strengthMod;
+      // Populate the encumbrance object with slot-based logic
+      return {
+        value: currentSlots,
+        max: maxSlots,
+        pct: Math.min(currentSlots / maxSlots, 1),
+        encumbered: currentSlots > maxSlots,
+        slots: currentSlots,
+        maxSlots: maxSlots
+      };
+    };
+    console.log(`${MODULE_ID} | Overrode dnd5e encumbrance calculation for slot-based logic.`);
+  }
+});
+
 // Display slots in character sheet
 Hooks.on('renderActorSheet5eCharacter', (app, html, data) => {
   const actor = app.actor;
   const currentSlots = actor.getFlag(MODULE_ID, FLAG_CURRENT_SLOTS) ?? 0;
   const maxSlots = actor.getFlag(MODULE_ID, FLAG_MAX_SLOTS) ?? (BASE_SLOTS + (actor.system?.abilities?.str?.mod ?? 0));
 
-  const inventoryHeader = html.find('.inventory-list .inventory-header .item-controls');
+  // Try several selectors for robustness (dnd5e 3.x)
+  let inventoryHeader = html.find('.tab.inventory .inventory-header .item-controls');
+  if (!inventoryHeader.length) {
+    inventoryHeader = html.find('.inventory-list .inventory-header .item-controls');
+  }
+  if (!inventoryHeader.length) {
+    inventoryHeader = html.find('.inventory-header .item-controls');
+  }
   if (inventoryHeader.length > 0) {
     if (html.find('.dnd-slot-inventory-slots').length === 0) {
       const slotElement = $(`
