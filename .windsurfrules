@@ -4,3 +4,4 @@
 * Use the tech stack and integration points outlined above when implementing features.
 * Consult the `TASK.md` for current priorities and backlog items.
 * Keep both files updated and in sync.
+* With every major change, update the version number in the `module.json` file.
